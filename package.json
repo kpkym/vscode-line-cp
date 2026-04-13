@@ -1,0 +1,37 @@
+{
+  "name": "vscode-line-cp",
+  "displayName": "Line Copy",
+  "description": "Copy file name with line numbers to clipboard",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": ["Other"],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "lineCopy.copyLineReference",
+        "title": "Copy Line Reference"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "lineCopy.copyLineReference",
+        "key": "alt+l",
+        "mac": "alt+l",
+        "when": "editorTextFocus"
+      }
+    ]
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.0",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.3.0"
+  }
+}
