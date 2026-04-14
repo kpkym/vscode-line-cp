@@ -16,14 +16,18 @@ export function activate(context: vscode.ExtensionContext) {
         : path.basename(editor.document.fileName);
       const selection = editor.selection;
 
-      // VS Code lines are 0-based, display as 1-based
-      const startLine = selection.start.line + 1;
-      const endLine = selection.end.line + 1;
-
-      const lineRef =
-        startLine === endLine
-          ? `@${fileName}#${startLine}`
-          : `@${fileName}#${startLine}-${endLine}`;
+      let lineRef: string;
+      if (selection.isEmpty) {
+        lineRef = `@${fileName}`;
+      } else {
+        // VS Code lines are 0-based, display as 1-based
+        const startLine = selection.start.line + 1;
+        const endLine = selection.end.line + 1;
+        lineRef =
+          startLine === endLine
+            ? `@${fileName}#${startLine}`
+            : `@${fileName}#${startLine}-${endLine}`;
+      }
 
       await vscode.env.clipboard.writeText(lineRef);
       vscode.window.setStatusBarMessage(`Copied: ${lineRef}`, 2000);
